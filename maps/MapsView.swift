@@ -2,16 +2,20 @@ import SwiftUI
 import GoogleMaps
 
 struct GoogleMapsView: UIViewRepresentable {
-    
+
     @Binding var origin: String
     @Binding var destination: String
     private let locationManager = CLLocationManager()
-
-        
-    let apiKey = "AIzaSyAJgkDmNRh-v8wyw_2J1n_2AG1BrHQb0DM"
     
     var directionsURL: String {
-        return generateDirectionsURL(origin: origin, destination: destination, apiKey: apiKey)
+        return generateDirectionsURL(origin: origin, destination: destination, apiKey: apiKeyRoute)
+    }
+    
+    private var apiKeyRoute: String {
+        guard let apiKeyRoute = Bundle.main.object(forInfoDictionaryKey: "GoogleMapsRouteAPIKey") as? String else {
+            fatalError("Google Maps API anahtarı bulunamadı.")
+        }
+        return apiKeyRoute
     }
     
     func generateDirectionsURL(origin: String, destination: String, apiKey: String) -> String {
@@ -22,7 +26,7 @@ struct GoogleMapsView: UIViewRepresentable {
         self._origin = origin
         self._destination = destination
     }
-    
+
     private func updateMapView(for mapView: GMSMapView) {
         
         mapView.clear()
