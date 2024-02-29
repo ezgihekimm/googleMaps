@@ -2,7 +2,7 @@ import SwiftUI
 import GoogleMaps
 
 struct GoogleMapsView: UIViewRepresentable {
-
+    
     @Binding var origin: String
     @Binding var destination: String
     private let locationManager = CLLocationManager()
@@ -26,7 +26,7 @@ struct GoogleMapsView: UIViewRepresentable {
         self._origin = origin
         self._destination = destination
     }
-
+    
     private func updateMapView(for mapView: GMSMapView) {
         
         mapView.clear()
@@ -81,9 +81,8 @@ struct GoogleMapsView: UIViewRepresentable {
     func makeUIView(context: Self.Context) -> GMSMapView {
         
         let camera = GMSCameraPosition.camera(withLatitude: 41.17957363123993, longitude: 28.89126764689173, zoom: 13.0)
-            let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-            mapView.isMyLocationEnabled = true // Kullanıcının konumunu haritada göster
-            return mapView
+        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        return mapView
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {

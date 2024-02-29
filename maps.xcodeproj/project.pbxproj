@@ -12,6 +12,7 @@
 		8D3C60E82B7E330F0011510E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3C60E72B7E330F0011510E /* ContentView.swift */; };
 		8D3C60EA2B7E33110011510E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D3C60E92B7E33110011510E /* Assets.xcassets */; };
 		8D3C60ED2B7E33110011510E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D3C60EC2B7E33110011510E /* Preview Assets.xcassets */; };
+		8D50EEB52B90CF960029C9C3 /* GooglePlacesAutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D50EEB42B90CF960029C9C3 /* GooglePlacesAutoComplete.swift */; };
 		E22476B23F6C651C4D13F6B8 /* Pods_maps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C54356C625E47544286E821 /* Pods_maps.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		8D3C60E72B7E330F0011510E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8D3C60E92B7E33110011510E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D3C60EC2B7E33110011510E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8D50EEB42B90CF960029C9C3 /* GooglePlacesAutoComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesAutoComplete.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				8D3C60E52B7E330F0011510E /* mapsApp.swift */,
 				8D0F661A2B7E3D8E00698F3A /* MapsView.swift */,
 				8D3C60E72B7E330F0011510E /* ContentView.swift */,
+				8D50EEB42B90CF960029C9C3 /* GooglePlacesAutoComplete.swift */,
 				8D3C60E92B7E33110011510E /* Assets.xcassets */,
 				8D3C60EB2B7E33110011510E /* Preview Content */,
 			);
@@ -208,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D50EEB52B90CF960029C9C3 /* GooglePlacesAutoComplete.swift in Sources */,
 				8D0F661B2B7E3D8E00698F3A /* MapsView.swift in Sources */,
 				8D3C60E82B7E330F0011510E /* ContentView.swift in Sources */,
 				8D3C60E62B7E330F0011510E /* mapsApp.swift in Sources */,

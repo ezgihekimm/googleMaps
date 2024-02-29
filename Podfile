@@ -6,5 +6,6 @@ target 'maps' do
   use_frameworks!
 
   # Pods for maps
-  pod 'GoogleMaps'	
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'		
 end

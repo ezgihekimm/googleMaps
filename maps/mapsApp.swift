@@ -1,5 +1,6 @@
 import SwiftUI
 import GoogleMaps
+import GooglePlaces
 
 @main
 struct mapsApp: App {
@@ -14,6 +15,12 @@ struct mapsApp: App {
             GMSServices.provideAPIKey(apiKey)
         } else {
             fatalError("Google Maps API anahtarı bulunamadı.")
+        }
+        
+        if let apiKey = Bundle.main.object(forInfoDictionaryKey: "PlacesKey") as? String {
+            GMSPlacesClient.provideAPIKey(apiKey)
+        } else {
+            fatalError("Google Places API anahtarı bulunamadı.")
         }
     }
 }
