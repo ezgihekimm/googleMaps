@@ -23,7 +23,6 @@ struct ContentView: View {
                         Text("Destination")
                         GooglePlacesAutoComplete(input: $input2, selectedPlace: $destination)
                             .cornerRadius(15)
-                    
                 }
 
             .padding(.top)

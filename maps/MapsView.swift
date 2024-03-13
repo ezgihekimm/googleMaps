@@ -7,6 +7,10 @@ struct GoogleMapsView: UIViewRepresentable {
     @Binding var destination: String
     private let locationManager = CLLocationManager()
     
+    func generatePlacesURL(location: String, radius: String, type: String, keyword: String, key: String) -> String {
+        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=\(keyword)&location=\(location)&radius=\(radius)&type=\(type)&key=\(key)"
+    }
+    
     var directionsURL: String {
         return generateDirectionsURL(origin: origin, destination: destination, apiKey: apiKeyRoute)
     }
@@ -27,7 +31,9 @@ struct GoogleMapsView: UIViewRepresentable {
         self._destination = destination
     }
     
-    private func updateMapView(for mapView: GMSMapView) {
+    private func updateMapView(for mapView: GMSMapView, completion: @escaping([String]) -> Void){
+        
+        var placesURLs: [String] = []
         
         mapView.clear()
         guard let url = URL(string: directionsURL) else {
@@ -54,8 +60,28 @@ struct GoogleMapsView: UIViewRepresentable {
                                 for leg in legs {
                                     if let steps = leg["steps"] as? [[String: Any]] {
                                         for step in steps {
-                                            if let polyline = step["polyline"] as? [String: String], let points = polyline["points"] {
+                                            if let startLocation = step["start_location"] as? [String: Double],
+                                               let endLocation = step["end_location"] as? [String: Double],
+                                               let polyline = step["polyline"] as? [String: String], let _ = polyline["points"] {
+                                              
+                                                // Başlangıç ve bitiş konumlarını alın
+                                                let startLat = startLocation["lat"] ?? 0.0
+                                                let startLng = startLocation["lng"] ?? 0.0
+                                                let endLat = endLocation["lat"] ?? 0.0
+                                                let endLng = endLocation["lng"] ?? 0.0
+                                                    
+                                                let locationStart = "\(startLat),\(startLng)"
+                                                let locationEnd = "\(endLat),\(endLng)"
+                                                  
+                                                let placesURL = generatePlacesURL(location: locationStart, radius: "1500", type: "restaurant", keyword: "cruise", key: apiKeyRoute)
                                                 
+                                                let placesURL2 = generatePlacesURL(location: locationEnd, radius: "1500", type: "restaurant", keyword: "cruise", key: apiKeyRoute)
+                                                
+                                                placesURLs.append(placesURL)
+                                                placesURLs.append(placesURL2)
+                                                
+                                            }
+                                            if let polyline = step["polyline"] as? [String: String], let points = polyline["points"] {
                                                 DispatchQueue.main.async {
                                                     let path = GMSPath(fromEncodedPath: points)
                                                     let polyline = GMSPolyline(path: path)
@@ -70,8 +96,11 @@ struct GoogleMapsView: UIViewRepresentable {
                             }
                         }
                     }
+                    
                 }
-            } catch {
+                completion(placesURLs)
+                print(placesURLs)
+                } catch {
                 print("Error parsing JSON: \(error)")
             }
         }
@@ -86,7 +115,8 @@ struct GoogleMapsView: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: GMSMapView, context: Context) {
-        updateMapView(for: mapView)
+        updateMapView(for: mapView) {placesURLs in
+        }
     }
     
 }
